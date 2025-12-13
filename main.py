@@ -813,7 +813,7 @@ def main():
                 "Group": group,
                 "Amount": f"${amount:,}",
                 "Status": status,
-                "Days Pending": days_pending if "Pending" in status else "-",
+                "Days Pending": str(days_pending) if "Pending" in status else "-",
                 "Urgency": "🔴 High" if days_pending > 7 else "🟡 Medium" if days_pending > 3 else "🟢 Low"
             })
         
@@ -1137,6 +1137,560 @@ def main():
                 st.dataframe(custom_filtered, width="stretch")
             else:
                 st.warning("No transactions match your custom criteria.")
+
+        # ===== ADDITIONAL VISUALS (36-41) =====
+        
+        # 36. Weekly Heatmap by Group
+        st.subheader("36. Weekly Heatmap by Group")
+        if not filtered.empty:
+            wk_data = filtered.copy()
+            wk_data["Week"] = ((pd.to_datetime(wk_data["Date"]).dt.day - 1) // 7) + 1
+            heat_data = wk_data.groupby(["Week", "Group Name"])["Amount"].sum().reset_index()
+            pivot_heat = heat_data.pivot(index="Group Name", columns="Week", values="Amount").fillna(0)
+            
+            fig_heat = go.Figure(data=go.Heatmap(
+                z=pivot_heat.values,
+                x=[f"Week {w}" for w in pivot_heat.columns],
+                y=pivot_heat.index,
+                colorscale="Blues",
+                hovertemplate='Group: %{y}<br>%{x}<br>Amount: $%{z:,.0f}<extra></extra>'
+            ))
+            fig_heat.update_layout(
+                title="Weekly Spending Heatmap by Group", 
+                xaxis_title="Week", 
+                yaxis_title="Group", 
+                height=300
+            )
+            st.plotly_chart(fig_heat, use_container_width=True)
+
+        # 37. Top-N Parts by Value
+        st.subheader("37. Top-N Parts by Value")
+        if not filtered.empty:
+            top_n = st.slider("Select Top N parts", 5, 30, 10, key="top_parts_slider")
+            parts_summary = filtered.groupby(["Part Name", "Group Name"])['Amount'].sum().reset_index()
+            top_parts = parts_summary.sort_values('Amount', ascending=False).head(top_n)
+            
+            fig_parts = px.bar(
+                top_parts, 
+                x='Amount', 
+                y='Part Name', 
+                orientation='h', 
+                color='Group Name',
+                title=f'Top {top_n} Parts by Value This Month'
+            )
+            fig_parts.update_layout(xaxis_tickformat='$,.0f', height=400, yaxis={'categoryorder':'total ascending'})
+            st.plotly_chart(fig_parts, use_container_width=True)
+
+        # 38. Bullet Chart per Group
+        st.subheader("38. Bullet Chart per Group (Actual vs Budget)")
+        if not filtered.empty:
+            for group_name in groups:
+                group_key = group_name.strip().lower()
+                budget = BUDGETS.get(group_key, 0)
+                actual = filtered[filtered['Group Name'] == group_name]['Amount'].sum()
+                
+                fig_bullet = go.Figure()
+                # Background budget bar (lighter)
+                fig_bullet.add_trace(go.Bar(
+                    x=[budget], 
+                    y=[group_name], 
+                    orientation='h', 
+                    marker_color='lightgray', 
+                    name='Budget',
+                    showlegend=False
+                ))
+                # Actual spending bar
+                fig_bullet.add_trace(go.Bar(
+                    x=[actual], 
+                    y=[group_name], 
+                    orientation='h', 
+                    marker_color='steelblue', 
+                    name='Actual',
+                    showlegend=False
+                ))
+                # Target line at budget
+                fig_bullet.add_vline(x=budget, line_dash='dash', line_color='red', line_width=2)
+                
+                fig_bullet.update_layout(
+                    title=f"{group_name} - Actual vs Budget",
+                    xaxis_tickformat='$,.0f', 
+                    height=120,
+                    margin=dict(l=50, r=50, t=50, b=30)
+                )
+                st.plotly_chart(fig_bullet, use_container_width=True)
+
+        # 39. Daily Rolling Average (7-day)
+        st.subheader("39. Daily 7-day Rolling Average by Group")
+        if not daily_usage.empty:
+            last_day = int(daily_usage['Day'].max())
+            days_range = list(range(1, last_day + 1))
+            
+            fig_rolling = go.Figure()
+            for group_name in groups:
+                group_daily = daily_usage[daily_usage['Group Name'] == group_name][['Day','Amount']].set_index('Day')
+                daily_indexed = group_daily.reindex(days_range, fill_value=0)
+                rolling_avg = daily_indexed['Amount'].rolling(window=7, min_periods=1).mean()
+                
+                fig_rolling.add_trace(go.Scatter(
+                    x=days_range, 
+                    y=rolling_avg, 
+                    mode='lines+markers', 
+                    name=group_name,
+                    hovertemplate='Day %{x}<br>7-day Average: $%{y:,.0f}<extra></extra>'
+                ))
+            
+            fig_rolling.update_layout(
+                title='7-day Rolling Average Spending by Group', 
+                xaxis_title='Day of Month', 
+                yaxis_title='Amount ($)',
+                yaxis_tickformat='$,.0f', 
+                height=400
+            )
+            st.plotly_chart(fig_rolling, use_container_width=True)
+
+        # 40. Vendor Spend Pareto
+        st.subheader("40. Vendor Spend Pareto Analysis")
+        if not filtered.empty:
+            # Simulate vendor mapping based on part name hash
+            vendors = ["Supplier A", "Supplier B", "Supplier C", "Supplier D", "Supplier E", "Supplier F"]
+            vendor_data = filtered.copy()
+            vendor_data['Vendor'] = vendor_data['Part Name'].apply(lambda x: vendors[hash(x) % len(vendors)])
+            
+            vendor_summary = vendor_data.groupby('Vendor')['Amount'].sum().reset_index()
+            vendor_summary = vendor_summary.sort_values('Amount', ascending=False)
+            vendor_summary['Cumulative'] = vendor_summary['Amount'].cumsum()
+            vendor_summary['Cumulative %'] = vendor_summary['Cumulative'] / vendor_summary['Amount'].sum() * 100
+            
+            fig_pareto = go.Figure()
+            # Bar chart for spend
+            fig_pareto.add_trace(go.Bar(
+                x=vendor_summary['Vendor'], 
+                y=vendor_summary['Amount'], 
+                name='Spend',
+                marker_color='steelblue',
+                yaxis='y'
+            ))
+            # Line chart for cumulative %
+            fig_pareto.add_trace(go.Scatter(
+                x=vendor_summary['Vendor'], 
+                y=vendor_summary['Cumulative %'], 
+                name='Cumulative %', 
+                yaxis='y2', 
+                mode='lines+markers',
+                line=dict(color='red'),
+                marker=dict(color='red')
+            ))
+            
+            fig_pareto.update_layout(
+                title='Vendor Spend Pareto Chart', 
+                yaxis=dict(title='Spend Amount ($)', tickformat='$,.0f'),
+                yaxis2=dict(title='Cumulative %', overlaying='y', side='right', range=[0,100]),
+                height=400
+            )
+            st.plotly_chart(fig_pareto, use_container_width=True)
+
+        # 41. Budget Reallocation Impact
+        st.subheader("41. Budget Reallocation Impact Simulator")
+        if not filtered.empty:
+            col1, col2, col3 = st.columns(3)
+            with col1:
+                source_group = st.selectbox('Source Group (reduce budget)', options=list(groups), key="realloc_source")
+            with col2:
+                target_group = st.selectbox('Target Group (increase budget)', options=[g for g in groups if g != source_group], key="realloc_target")
+            with col3:
+                realloc_amount = st.number_input('Reallocation Amount ($)', min_value=0, max_value=50000, value=5000, step=1000)
+            
+            if st.button('🔄 Show Reallocation Impact', key="show_realloc"):
+                before_util = []
+                after_util = []
+                group_names = []
+                
+                for group_name in groups:
+                    key = group_name.strip().lower()
+                    original_budget = BUDGETS.get(key, 0)
+                    actual_spent = filtered[filtered['Group Name'] == group_name]['Amount'].sum()
+                    
+                    # Calculate new budget after reallocation
+                    if group_name == source_group:
+                        new_budget = original_budget - realloc_amount
+                    elif group_name == target_group:
+                        new_budget = original_budget + realloc_amount
+                    else:
+                        new_budget = original_budget
+                    
+                    # Calculate utilization percentages
+                    before_pct = (actual_spent / original_budget * 100) if original_budget > 0 else 0
+                    after_pct = (actual_spent / new_budget * 100) if new_budget > 0 else 0
+                    
+                    group_names.append(group_name)
+                    before_util.append(before_pct)
+                    after_util.append(after_pct)
+                
+                fig_impact = go.Figure()
+                fig_impact.add_trace(go.Bar(
+                    x=group_names, 
+                    y=before_util, 
+                    name='Before Reallocation', 
+                    marker_color='lightcoral'
+                ))
+                fig_impact.add_trace(go.Bar(
+                    x=group_names, 
+                    y=after_util, 
+                    name='After Reallocation', 
+                    marker_color='steelblue'
+                ))
+                
+                fig_impact.update_layout(
+                    title=f'Budget Utilization: Before vs After (${realloc_amount:,} from {source_group} to {target_group})',
+                    barmode='group', 
+                    yaxis_title='Utilization %',
+                    height=400,
+                    yaxis=dict(range=[0, max(max(before_util), max(after_util)) * 1.1])
+                )
+                st.plotly_chart(fig_impact, use_container_width=True)
+                
+                # Show summary table
+                summary_data = []
+                for i, group in enumerate(group_names):
+                    summary_data.append({
+                        "Group": group,
+                        "Before %": f"{before_util[i]:.1f}%",
+                        "After %": f"{after_util[i]:.1f}%",
+                        "Change": f"{after_util[i] - before_util[i]:+.1f}%"
+                    })
+                st.dataframe(pd.DataFrame(summary_data), use_container_width=True)
+
+        # ===== EXECUTIVE SUMMARY CARDS =====
+        st.markdown("---")
+        st.header("📊 Executive Summary Dashboard")
+        
+        # Calculate key metrics
+        total_spent = filtered['Amount'].sum()
+        total_budget = sum(BUDGETS.values())
+        remaining_budget = total_budget - total_spent
+        burn_rate = total_spent / len(filtered['Date'].unique()) if len(filtered['Date'].unique()) > 0 else 0
+        
+        # Top spending group
+        group_totals = filtered.groupby('Group Name')['Amount'].sum()
+        top_group = group_totals.idxmax() if not group_totals.empty else "N/A"
+        top_group_amount = group_totals.max() if not group_totals.empty else 0
+        
+        # Risk assessment
+        over_budget_groups = []
+        for group_name in groups:
+            key = group_name.strip().lower()
+            budget = BUDGETS.get(key, 0)
+            spent = filtered[filtered['Group Name'] == group_name]['Amount'].sum()
+            if spent > budget:
+                over_budget_groups.append(group_name)
+        
+        # Summary cards in columns
+        col1, col2, col3, col4 = st.columns(4)
+        
+        with col1:
+            st.metric(
+                label="💰 Total Spent",
+                value=f"${total_spent:,.0f}",
+                delta=f"{((total_spent/total_budget)*100):.1f}% of budget" if total_budget > 0 else "No budget"
+            )
+            
+            st.metric(
+                label="🎯 Budget Remaining",
+                value=f"${remaining_budget:,.0f}",
+                delta=f"{((remaining_budget/total_budget)*100):.1f}% remaining" if total_budget > 0 else "N/A"
+            )
+        
+        with col2:
+            st.metric(
+                label="🔥 Daily Burn Rate",
+                value=f"${burn_rate:,.0f}/day",
+                delta="Average daily spending"
+            )
+            
+            days_remaining = remaining_budget / burn_rate if burn_rate > 0 else float('inf')
+            runway_text = f"{days_remaining:.0f} days" if days_remaining != float('inf') else "∞ days"
+            st.metric(
+                label="📅 Budget Runway",
+                value=runway_text,
+                delta="At current burn rate"
+            )
+        
+        with col3:
+            st.metric(
+                label="🏆 Top Spending Group",
+                value=top_group,
+                delta=f"${top_group_amount:,.0f}"
+            )
+            
+            transaction_count = len(filtered)
+            avg_transaction = total_spent / transaction_count if transaction_count > 0 else 0
+            st.metric(
+                label="📊 Avg Transaction",
+                value=f"${avg_transaction:,.0f}",
+                delta=f"{transaction_count} transactions"
+            )
+        
+        with col4:
+            risk_level = "🔴 HIGH" if len(over_budget_groups) > 0 else "🟡 MEDIUM" if (total_spent/total_budget) > 0.8 else "🟢 LOW"
+            st.metric(
+                label="⚠️ Risk Level",
+                value=risk_level,
+                delta=f"{len(over_budget_groups)} groups over budget" if over_budget_groups else "All groups on track"
+            )
+            
+            efficiency = (total_spent / total_budget * 100) if total_budget > 0 else 0
+            efficiency_rating = "Excellent" if efficiency < 70 else "Good" if efficiency < 85 else "Warning" if efficiency < 100 else "Over Budget"
+            st.metric(
+                label="📈 Efficiency Rating",
+                value=efficiency_rating,
+                delta=f"{efficiency:.1f}% utilized"
+            )
+        
+        # Key insights section
+        st.subheader("🔍 Key Insights")
+        insights_col1, insights_col2 = st.columns(2)
+        
+        with insights_col1:
+            st.info(f"**Budget Health**: {len(groups) - len(over_budget_groups)}/{len(groups)} groups are within budget")
+            
+            if burn_rate > 0:
+                projected_month_end = total_spent + (burn_rate * (30 - len(filtered['Date'].unique())))
+                st.info(f"**Month-End Projection**: ${projected_month_end:,.0f} total spending expected")
+            
+            # Efficiency insights
+            most_efficient = None
+            best_efficiency = float('inf')
+            for group_name in groups:
+                key = group_name.strip().lower()
+                budget = BUDGETS.get(key, 0)
+                spent = filtered[filtered['Group Name'] == group_name]['Amount'].sum()
+                if budget > 0:
+                    efficiency_pct = (spent / budget) * 100
+                    if efficiency_pct < best_efficiency and spent > 0:
+                        best_efficiency = efficiency_pct
+                        most_efficient = group_name
+            
+            if most_efficient:
+                st.success(f"**Most Efficient**: {most_efficient} at {best_efficiency:.1f}% budget utilization")
+        
+        with insights_col2:
+            if over_budget_groups:
+                st.warning(f"**Action Required**: {', '.join(over_budget_groups)} exceed{'s' if len(over_budget_groups) == 1 else ''} budget")
+            
+            # Spending trend
+            if len(filtered) > 1:
+                recent_days = filtered[filtered['Date'] >= filtered['Date'].max() - pd.Timedelta(days=3)]
+                recent_spend = recent_days['Amount'].sum()
+                recent_avg = recent_spend / 3 if len(recent_days) > 0 else 0
+                
+                if recent_avg > burn_rate * 1.2:
+                    st.warning(f"**Spending Spike**: Recent 3-day average (${recent_avg:,.0f}/day) is 20%+ above normal")
+                elif recent_avg < burn_rate * 0.8:
+                    st.info(f"**Spending Slow**: Recent activity is below average burn rate")
+            
+            # Budget optimization suggestion
+            if remaining_budget > 0:
+                days_left = 30 - len(filtered['Date'].unique())
+                recommended_daily = remaining_budget / days_left if days_left > 0 else 0
+                if recommended_daily < burn_rate:
+                    st.warning(f"**Pace Adjustment**: Reduce to ${recommended_daily:,.0f}/day to stay on budget")
+
+        # ===== PER-GROUP EXECUTIVE SUMMARIES =====
+        st.markdown("---")
+        st.header("📋 Group-Level Executive Summaries")
+        
+        # Create tabs for each group
+        group_tabs = st.tabs(list(groups))
+        
+        for idx, group_name in enumerate(groups):
+            with group_tabs[idx]:
+                # Filter data for this group
+                group_data = filtered[filtered['Group Name'] == group_name]
+                group_key = group_name.strip().lower()
+                group_budget = BUDGETS.get(group_key, 0)
+                group_spent = group_data['Amount'].sum()
+                group_remaining = group_budget - group_spent
+                
+                # Group metrics
+                st.subheader(f"💼 {group_name} Summary")
+                
+                # Top row metrics
+                gcol1, gcol2, gcol3, gcol4 = st.columns(4)
+                
+                with gcol1:
+                    utilization = (group_spent / group_budget * 100) if group_budget > 0 else 0
+                    status = "🔴 Over" if utilization > 100 else "🟡 Warning" if utilization > 80 else "🟢 On Track"
+                    st.metric(
+                        label="💰 Total Spent",
+                        value=f"${group_spent:,.0f}",
+                        delta=f"${group_budget:,.0f} budget"
+                    )
+                    st.metric(
+                        label="📊 Budget Status",
+                        value=status,
+                        delta=f"{utilization:.1f}% utilized"
+                    )
+                
+                with gcol2:
+                    group_transactions = len(group_data)
+                    avg_transaction = group_spent / group_transactions if group_transactions > 0 else 0
+                    st.metric(
+                        label="🔢 Transactions",
+                        value=f"{group_transactions}",
+                        delta=f"${avg_transaction:,.0f} avg"
+                    )
+                    
+                    daily_spend = group_spent / len(group_data['Date'].unique()) if len(group_data['Date'].unique()) > 0 else 0
+                    st.metric(
+                        label="📅 Daily Burn",
+                        value=f"${daily_spend:,.0f}",
+                        delta="per day"
+                    )
+                
+                with gcol3:
+                    st.metric(
+                        label="💵 Remaining",
+                        value=f"${group_remaining:,.0f}",
+                        delta=f"{(group_remaining/group_budget*100):.1f}% left" if group_budget > 0 else "N/A"
+                    )
+                    
+                    # Days remaining at current pace
+                    runway_days = group_remaining / daily_spend if daily_spend > 0 and group_remaining > 0 else 0
+                    runway_text = f"{runway_days:.0f} days" if runway_days > 0 else "Budget exhausted" if group_remaining <= 0 else "∞ days"
+                    st.metric(
+                        label="⏳ Runway",
+                        value=runway_text,
+                        delta="at current pace"
+                    )
+                
+                with gcol4:
+                    # Top part for this group
+                    if not group_data.empty:
+                        top_part = group_data.groupby('Part Name')['Amount'].sum().idxmax()
+                        top_part_amount = group_data.groupby('Part Name')['Amount'].sum().max()
+                        st.metric(
+                            label="🏆 Top Part",
+                            value=top_part[:15] + "..." if len(top_part) > 15 else top_part,
+                            delta=f"${top_part_amount:,.0f}"
+                        )
+                    
+                    # Risk assessment for group
+                    risk = "🔴 HIGH" if utilization > 100 else "🟡 MEDIUM" if utilization > 80 else "🟢 LOW"
+                    st.metric(
+                        label="⚠️ Risk Level",
+                        value=risk,
+                        delta="budget risk"
+                    )
+                
+                # Group-specific charts
+                if not group_data.empty:
+                    chart_col1, chart_col2 = st.columns(2)
+                    
+                    with chart_col1:
+                        # Daily spending trend for this group
+                        daily_group = group_data.groupby('Date')['Amount'].sum().reset_index()
+                        daily_group['Day'] = pd.to_datetime(daily_group['Date']).dt.day
+                        
+                        fig_trend = px.line(
+                            daily_group, 
+                            x='Day', 
+                            y='Amount',
+                            title=f'{group_name} Daily Spending Trend',
+                            markers=True
+                        )
+                        fig_trend.update_layout(height=250, yaxis_tickformat='$,.0f')
+                        st.plotly_chart(fig_trend, use_container_width=True)
+                    
+                    with chart_col2:
+                        # Top parts breakdown for this group
+                        parts_breakdown = group_data.groupby('Part Name')['Amount'].sum().sort_values(ascending=False).head(5)
+                        
+                        fig_parts = px.pie(
+                            values=parts_breakdown.values,
+                            names=parts_breakdown.index,
+                            title=f'{group_name} Top 5 Parts'
+                        )
+                        fig_parts.update_layout(height=250, showlegend=False)
+                        fig_parts.update_traces(textposition='inside', textinfo='percent+label')
+                        st.plotly_chart(fig_parts, use_container_width=True)
+                
+                # Group insights
+                st.subheader("🔍 Key Insights")
+                insight_col1, insight_col2 = st.columns(2)
+                
+                with insight_col1:
+                    # Performance vs other groups
+                    all_group_util = {}
+                    for g in groups:
+                        gk = g.strip().lower()
+                        gb = BUDGETS.get(gk, 0)
+                        gs = filtered[filtered['Group Name'] == g]['Amount'].sum()
+                        if gb > 0:
+                            all_group_util[g] = (gs / gb * 100)
+                    
+                    if all_group_util:
+                        group_rank = sorted(all_group_util.items(), key=lambda x: x[1])
+                        group_position = next((i+1 for i, (name, _) in enumerate(group_rank) if name == group_name), 0)
+                        st.info(f"**Efficiency Ranking**: #{group_position} out of {len(groups)} groups")
+                    
+                    # Recent activity
+                    if len(group_data) > 1:
+                        recent_days = 3
+                        recent_data = group_data[group_data['Date'] >= group_data['Date'].max() - pd.Timedelta(days=recent_days-1)]
+                        recent_avg = recent_data['Amount'].sum() / recent_days
+                        
+                        if recent_avg > daily_spend * 1.3:
+                            st.warning(f"**Recent Spike**: ${recent_avg:,.0f}/day in last {recent_days} days (+30%)")
+                        elif recent_avg < daily_spend * 0.7:
+                            st.info(f"**Reduced Activity**: ${recent_avg:,.0f}/day in last {recent_days} days (-30%)")
+                        else:
+                            st.success(f"**Steady Pace**: ${recent_avg:,.0f}/day in last {recent_days} days")
+                
+                with insight_col2:
+                    # Recommendations
+                    if utilization > 100:
+                        overspend = group_spent - group_budget
+                        st.error(f"**Over Budget**: ${overspend:,.0f} over limit - immediate action required")
+                    elif utilization > 90:
+                        st.warning(f"**Near Limit**: Only ${group_remaining:,.0f} remaining - monitor closely")
+                    elif utilization < 50:
+                        st.success(f"**Under-utilized**: ${group_remaining:,.0f} available for additional projects")
+                    
+                    # Forecasting
+                    days_left_in_month = 30 - len(group_data['Date'].unique())
+                    if days_left_in_month > 0 and daily_spend > 0:
+                        projected_total = group_spent + (daily_spend * days_left_in_month)
+                        projected_util = (projected_total / group_budget * 100) if group_budget > 0 else 0
+                        
+                        if projected_util > 100:
+                            st.warning(f"**Projection**: Will exceed budget by ${projected_total - group_budget:,.0f}")
+                        else:
+                            st.info(f"**Projection**: Will use {projected_util:.1f}% of budget by month-end")
+                
+                # Action items for this group
+                st.subheader("📋 Action Items")
+                action_items = []
+                
+                if utilization > 100:
+                    action_items.append("🔴 **URGENT**: Review and halt non-essential spending")
+                elif utilization > 85:
+                    action_items.append("🟡 **MONITOR**: Approve only critical expenses")
+                
+                if not group_data.empty:
+                    large_transactions = group_data[group_data['Amount'] > avg_transaction * 2]
+                    if len(large_transactions) > 0:
+                        action_items.append(f"🔍 **REVIEW**: {len(large_transactions)} transactions above 2x average")
+                
+                if daily_spend > 0:
+                    recommended_daily = group_remaining / days_left_in_month if days_left_in_month > 0 else 0
+                    if recommended_daily < daily_spend * 0.8:
+                        action_items.append(f"📉 **REDUCE**: Cut daily spending to ${recommended_daily:,.0f} to stay on budget")
+                
+                if not action_items:
+                    action_items.append("✅ **ON TRACK**: Continue current spending patterns")
+                
+                for item in action_items:
+                    st.markdown(f"- {item}")
 
 
 if __name__ == "__main__":
