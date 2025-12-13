@@ -1,0 +1,902 @@
+[
+  {
+    "Part Name": "Interface-0003",
+    "Group Name": "GroupB",
+    "Date": "2025-11-01",
+    "Amount": 1186.58
+  },
+  {
+    "Part Name": "Interface-0041",
+    "Group Name": "GroupB",
+    "Date": "2025-11-01",
+    "Amount": 1835.9
+  },
+  {
+    "Part Name": "Module-0043",
+    "Group Name": "GroupA",
+    "Date": "2025-11-02",
+    "Amount": 3380.19
+  },
+  {
+    "Part Name": "Component-0061",
+    "Group Name": "GroupA",
+    "Date": "2025-11-02",
+    "Amount": 2212.77
+  },
+  {
+    "Part Name": "Switch-0063",
+    "Group Name": "GroupB",
+    "Date": "2025-11-02",
+    "Amount": 3229.84
+  },
+  {
+    "Part Name": "Circuit-0021",
+    "Group Name": "GroupC",
+    "Date": "2025-11-02",
+    "Amount": 3546.28
+  },
+  {
+    "Part Name": "Sensor-0050",
+    "Group Name": "GroupB",
+    "Date": "2025-11-03",
+    "Amount": 3931.58
+  },
+  {
+    "Part Name": "Chip-0045",
+    "Group Name": "GroupC",
+    "Date": "2025-11-03",
+    "Amount": 4394.29
+  },
+  {
+    "Part Name": "Screw-0054",
+    "Group Name": "Parts",
+    "Date": "2025-11-03",
+    "Amount": 2438.01
+  },
+  {
+    "Part Name": "Module-0023",
+    "Group Name": "GroupA",
+    "Date": "2025-11-04",
+    "Amount": 3342.89
+  },
+  {
+    "Part Name": "Module-0031",
+    "Group Name": "GroupA",
+    "Date": "2025-11-04",
+    "Amount": 1091.58
+  },
+  {
+    "Part Name": "Component-0032",
+    "Group Name": "GroupA",
+    "Date": "2025-11-04",
+    "Amount": 3632.16
+  },
+  {
+    "Part Name": "Widget-0059",
+    "Group Name": "GroupA",
+    "Date": "2025-11-04",
+    "Amount": 1368.56
+  },
+  {
+    "Part Name": "Module-0029",
+    "Group Name": "GroupA",
+    "Date": "2025-11-05",
+    "Amount": 3508.3
+  },
+  {
+    "Part Name": "Unit-0069",
+    "Group Name": "GroupA",
+    "Date": "2025-11-05",
+    "Amount": 3919.99
+  },
+  {
+    "Part Name": "Processor-0028",
+    "Group Name": "GroupC",
+    "Date": "2025-11-06",
+    "Amount": 728.77
+  },
+  {
+    "Part Name": "Board-0053",
+    "Group Name": "GroupC",
+    "Date": "2025-11-06",
+    "Amount": 3519.29
+  },
+  {
+    "Part Name": "Processor-0057",
+    "Group Name": "GroupC",
+    "Date": "2025-11-06",
+    "Amount": 4405.49
+  },
+  {
+    "Part Name": "Processor-0009",
+    "Group Name": "GroupC",
+    "Date": "2025-11-07",
+    "Amount": 2764.89
+  },
+  {
+    "Part Name": "Processor-0025",
+    "Group Name": "GroupC",
+    "Date": "2025-11-07",
+    "Amount": 3961.97
+  },
+  {
+    "Part Name": "Spring-0020",
+    "Group Name": "Parts",
+    "Date": "2025-11-07",
+    "Amount": 1503.02
+  },
+  {
+    "Part Name": "Sensor-0011",
+    "Group Name": "GroupB",
+    "Date": "2025-11-08",
+    "Amount": 1703.9
+  },
+  {
+    "Part Name": "Circuit-0027",
+    "Group Name": "GroupC",
+    "Date": "2025-11-08",
+    "Amount": 1102.33
+  },
+  {
+    "Part Name": "Widget-0072",
+    "Group Name": "GroupA",
+    "Date": "2025-11-09",
+    "Amount": 3873.63
+  },
+  {
+    "Part Name": "Adapter-0014",
+    "Group Name": "GroupB",
+    "Date": "2025-11-09",
+    "Amount": 794.46
+  },
+  {
+    "Part Name": "Chip-0036",
+    "Group Name": "GroupC",
+    "Date": "2025-11-09",
+    "Amount": 4126.59
+  },
+  {
+    "Part Name": "Switch-0002",
+    "Group Name": "GroupB",
+    "Date": "2025-11-10",
+    "Amount": 2081.26
+  },
+  {
+    "Part Name": "Chip-0042",
+    "Group Name": "GroupC",
+    "Date": "2025-11-11",
+    "Amount": 3713.29
+  },
+  {
+    "Part Name": "Chip-0070",
+    "Group Name": "GroupC",
+    "Date": "2025-11-11",
+    "Amount": 4794.28
+  },
+  {
+    "Part Name": "Screw-0018",
+    "Group Name": "Parts",
+    "Date": "2025-11-11",
+    "Amount": 4040.63
+  },
+  {
+    "Part Name": "Switch-0019",
+    "Group Name": "GroupB",
+    "Date": "2025-11-12",
+    "Amount": 626.59
+  },
+  {
+    "Part Name": "Module-0006",
+    "Group Name": "GroupA",
+    "Date": "2025-11-13",
+    "Amount": 3314.16
+  },
+  {
+    "Part Name": "Assembly-0058",
+    "Group Name": "GroupA",
+    "Date": "2025-11-13",
+    "Amount": 2891.9
+  },
+  {
+    "Part Name": "Screw-0046",
+    "Group Name": "Parts",
+    "Date": "2025-11-13",
+    "Amount": 2604.39
+  },
+  {
+    "Part Name": "Unit-0030",
+    "Group Name": "GroupA",
+    "Date": "2025-11-14",
+    "Amount": 1381.96
+  },
+  {
+    "Part Name": "Controller-0044",
+    "Group Name": "GroupB",
+    "Date": "2025-11-14",
+    "Amount": 3757.06
+  },
+  {
+    "Part Name": "Switch-0075",
+    "Group Name": "GroupB",
+    "Date": "2025-11-14",
+    "Amount": 1758.05
+  },
+  {
+    "Part Name": "Controller-0037",
+    "Group Name": "GroupB",
+    "Date": "2025-11-15",
+    "Amount": 3666.04
+  },
+  {
+    "Part Name": "Component-0048",
+    "Group Name": "GroupA",
+    "Date": "2025-11-16",
+    "Amount": 3905.03
+  },
+  {
+    "Part Name": "Assembly-0066",
+    "Group Name": "GroupA",
+    "Date": "2025-11-16",
+    "Amount": 4349.89
+  },
+  {
+    "Part Name": "Controller-0049",
+    "Group Name": "GroupB",
+    "Date": "2025-11-16",
+    "Amount": 3290.72
+  },
+  {
+    "Part Name": "Memory-0010",
+    "Group Name": "GroupC",
+    "Date": "2025-11-16",
+    "Amount": 830.37
+  },
+  {
+    "Part Name": "Bolt-0062",
+    "Group Name": "Parts",
+    "Date": "2025-11-17",
+    "Amount": 4107.58
+  },
+  {
+    "Part Name": "Switch-0039",
+    "Group Name": "GroupB",
+    "Date": "2025-11-18",
+    "Amount": 1380.75
+  },
+  {
+    "Part Name": "Screw-0073",
+    "Group Name": "Parts",
+    "Date": "2025-11-18",
+    "Amount": 4304.38
+  },
+  {
+    "Part Name": "Module-0060",
+    "Group Name": "GroupA",
+    "Date": "2025-11-19",
+    "Amount": 1719.95
+  },
+  {
+    "Part Name": "Switch-0024",
+    "Group Name": "GroupB",
+    "Date": "2025-11-19",
+    "Amount": 1821.24
+  },
+  {
+    "Part Name": "Interface-0051",
+    "Group Name": "GroupB",
+    "Date": "2025-11-19",
+    "Amount": 1471.34
+  },
+  {
+    "Part Name": "Circuit-0068",
+    "Group Name": "GroupC",
+    "Date": "2025-11-19",
+    "Amount": 2726.34
+  },
+  {
+    "Part Name": "Gasket-0001",
+    "Group Name": "Parts",
+    "Date": "2025-11-19",
+    "Amount": 3251.1
+  },
+  {
+    "Part Name": "Controller-0034",
+    "Group Name": "GroupB",
+    "Date": "2025-11-20",
+    "Amount": 3437.68
+  },
+  {
+    "Part Name": "Interface-0047",
+    "Group Name": "GroupB",
+    "Date": "2025-11-20",
+    "Amount": 2732.36
+  },
+  {
+    "Part Name": "Memory-0007",
+    "Group Name": "GroupC",
+    "Date": "2025-11-20",
+    "Amount": 4218.15
+  },
+  {
+    "Part Name": "Memory-0012",
+    "Group Name": "GroupC",
+    "Date": "2025-11-20",
+    "Amount": 4063.46
+  },
+  {
+    "Part Name": "Assembly-0038",
+    "Group Name": "GroupA",
+    "Date": "2025-11-21",
+    "Amount": 537.12
+  },
+  {
+    "Part Name": "Adapter-0022",
+    "Group Name": "GroupB",
+    "Date": "2025-11-21",
+    "Amount": 2773.15
+  },
+  {
+    "Part Name": "Board-0017",
+    "Group Name": "GroupC",
+    "Date": "2025-11-22",
+    "Amount": 690.3
+  },
+  {
+    "Part Name": "Spring-0033",
+    "Group Name": "Parts",
+    "Date": "2025-11-22",
+    "Amount": 7238.03
+  },
+  {
+    "Part Name": "Circuit-0005",
+    "Group Name": "GroupC",
+    "Date": "2025-11-23",
+    "Amount": 3817.76
+  },
+  {
+    "Part Name": "Bolt-0074",
+    "Group Name": "Parts",
+    "Date": "2025-11-23",
+    "Amount": 6159.29
+  },
+  {
+    "Part Name": "Unit-0008",
+    "Group Name": "GroupA",
+    "Date": "2025-11-24",
+    "Amount": 4433.89
+  },
+  {
+    "Part Name": "Assembly-0065",
+    "Group Name": "GroupA",
+    "Date": "2025-11-24",
+    "Amount": 1516.99
+  },
+  {
+    "Part Name": "Assembly-0071",
+    "Group Name": "GroupA",
+    "Date": "2025-11-24",
+    "Amount": 613.04
+  },
+  {
+    "Part Name": "Bolt-0015",
+    "Group Name": "Parts",
+    "Date": "2025-11-24",
+    "Amount": 6832.95
+  },
+  {
+    "Part Name": "Controller-0004",
+    "Group Name": "GroupB",
+    "Date": "2025-11-25",
+    "Amount": 1669.92
+  },
+  {
+    "Part Name": "Gasket-0016",
+    "Group Name": "Parts",
+    "Date": "2025-11-25",
+    "Amount": 1399.39
+  },
+  {
+    "Part Name": "Spring-0055",
+    "Group Name": "Parts",
+    "Date": "2025-11-25",
+    "Amount": 6925.75
+  },
+  {
+    "Part Name": "Controller-0040",
+    "Group Name": "GroupB",
+    "Date": "2025-11-26",
+    "Amount": 3551.72
+  },
+  {
+    "Part Name": "Processor-0013",
+    "Group Name": "GroupC",
+    "Date": "2025-11-26",
+    "Amount": 682.36
+  },
+  {
+    "Part Name": "Board-0026",
+    "Group Name": "GroupC",
+    "Date": "2025-11-26",
+    "Amount": 4961.42
+  },
+  {
+    "Part Name": "Washer-0035",
+    "Group Name": "Parts",
+    "Date": "2025-11-26",
+    "Amount": 2099.52
+  },
+  {
+    "Part Name": "Interface-0056",
+    "Group Name": "GroupB",
+    "Date": "2025-11-27",
+    "Amount": 2376.02
+  },
+  {
+    "Part Name": "Controller-0064",
+    "Group Name": "GroupB",
+    "Date": "2025-11-27",
+    "Amount": 2835.3
+  },
+  {
+    "Part Name": "Washer-0052",
+    "Group Name": "Parts",
+    "Date": "2025-11-27",
+    "Amount": 4780.84
+  },
+  {
+    "Part Name": "Screw-0067",
+    "Group Name": "Parts",
+    "Date": "2025-11-28",
+    "Amount": 3524.12
+  },
+  {
+    "Part Name": "Memory-0087",
+    "Group Name": "GroupC",
+    "Date": "2025-12-01",
+    "Amount": 1362.3
+  },
+  {
+    "Part Name": "Washer-0089",
+    "Group Name": "Parts",
+    "Date": "2025-12-01",
+    "Amount": 6514.6
+  },
+  {
+    "Part Name": "Bolt-0122",
+    "Group Name": "Parts",
+    "Date": "2025-12-01",
+    "Amount": 1826.77
+  },
+  {
+    "Part Name": "Module-0127",
+    "Group Name": "GroupA",
+    "Date": "2025-12-02",
+    "Amount": 3904.9
+  },
+  {
+    "Part Name": "Chip-0098",
+    "Group Name": "GroupC",
+    "Date": "2025-12-02",
+    "Amount": 1013.63
+  },
+  {
+    "Part Name": "Memory-0134",
+    "Group Name": "GroupC",
+    "Date": "2025-12-02",
+    "Amount": 573.45
+  },
+  {
+    "Part Name": "Bolt-0097",
+    "Group Name": "Parts",
+    "Date": "2025-12-02",
+    "Amount": 7896.35
+  },
+  {
+    "Part Name": "Bolt-0105",
+    "Group Name": "Parts",
+    "Date": "2025-12-02",
+    "Amount": 6682.31
+  },
+  {
+    "Part Name": "Spring-0144",
+    "Group Name": "Parts",
+    "Date": "2025-12-02",
+    "Amount": 3052.68
+  },
+  {
+    "Part Name": "Assembly-0079",
+    "Group Name": "GroupA",
+    "Date": "2025-12-03",
+    "Amount": 4426.39
+  },
+  {
+    "Part Name": "Component-0111",
+    "Group Name": "GroupA",
+    "Date": "2025-12-03",
+    "Amount": 3193.04
+  },
+  {
+    "Part Name": "Module-0123",
+    "Group Name": "GroupA",
+    "Date": "2025-12-03",
+    "Amount": 513.49
+  },
+  {
+    "Part Name": "Memory-0104",
+    "Group Name": "GroupC",
+    "Date": "2025-12-03",
+    "Amount": 2915.89
+  },
+  {
+    "Part Name": "Memory-0118",
+    "Group Name": "GroupC",
+    "Date": "2025-12-03",
+    "Amount": 3995.94
+  },
+  {
+    "Part Name": "Washer-0115",
+    "Group Name": "Parts",
+    "Date": "2025-12-03",
+    "Amount": 4137.17
+  },
+  {
+    "Part Name": "Gasket-0146",
+    "Group Name": "Parts",
+    "Date": "2025-12-03",
+    "Amount": 5275.36
+  },
+  {
+    "Part Name": "Unit-0138",
+    "Group Name": "GroupA",
+    "Date": "2025-12-04",
+    "Amount": 709.35
+  },
+  {
+    "Part Name": "Memory-0083",
+    "Group Name": "GroupC",
+    "Date": "2025-12-04",
+    "Amount": 3157.91
+  },
+  {
+    "Part Name": "Spring-0095",
+    "Group Name": "Parts",
+    "Date": "2025-12-04",
+    "Amount": 3695.29
+  },
+  {
+    "Part Name": "Bolt-0103",
+    "Group Name": "Parts",
+    "Date": "2025-12-04",
+    "Amount": 7315.89
+  },
+  {
+    "Part Name": "Unit-0092",
+    "Group Name": "GroupA",
+    "Date": "2025-12-05",
+    "Amount": 4943.86
+  },
+  {
+    "Part Name": "Switch-0094",
+    "Group Name": "GroupB",
+    "Date": "2025-12-05",
+    "Amount": 2065.96
+  },
+  {
+    "Part Name": "Adapter-0140",
+    "Group Name": "GroupB",
+    "Date": "2025-12-05",
+    "Amount": 3698.75
+  },
+  {
+    "Part Name": "Board-0082",
+    "Group Name": "GroupC",
+    "Date": "2025-12-05",
+    "Amount": 4483.0
+  },
+  {
+    "Part Name": "Gasket-0086",
+    "Group Name": "Parts",
+    "Date": "2025-12-05",
+    "Amount": 3630.76
+  },
+  {
+    "Part Name": "Spring-0090",
+    "Group Name": "Parts",
+    "Date": "2025-12-05",
+    "Amount": 4607.89
+  },
+  {
+    "Part Name": "Bolt-0102",
+    "Group Name": "Parts",
+    "Date": "2025-12-05",
+    "Amount": 5611.37
+  },
+  {
+    "Part Name": "Spring-0107",
+    "Group Name": "Parts",
+    "Date": "2025-12-05",
+    "Amount": 2461.41
+  },
+  {
+    "Part Name": "Bolt-0131",
+    "Group Name": "Parts",
+    "Date": "2025-12-05",
+    "Amount": 7766.66
+  },
+  {
+    "Part Name": "Component-0085",
+    "Group Name": "GroupA",
+    "Date": "2025-12-06",
+    "Amount": 728.79
+  },
+  {
+    "Part Name": "Assembly-0147",
+    "Group Name": "GroupA",
+    "Date": "2025-12-06",
+    "Amount": 3205.72
+  },
+  {
+    "Part Name": "Adapter-0093",
+    "Group Name": "GroupB",
+    "Date": "2025-12-06",
+    "Amount": 894.35
+  },
+  {
+    "Part Name": "Board-0100",
+    "Group Name": "GroupC",
+    "Date": "2025-12-06",
+    "Amount": 2610.04
+  },
+  {
+    "Part Name": "Chip-0149",
+    "Group Name": "GroupC",
+    "Date": "2025-12-06",
+    "Amount": 3868.91
+  },
+  {
+    "Part Name": "Switch-0109",
+    "Group Name": "GroupB",
+    "Date": "2025-12-07",
+    "Amount": 1220.43
+  },
+  {
+    "Part Name": "Switch-0125",
+    "Group Name": "GroupB",
+    "Date": "2025-12-07",
+    "Amount": 515.66
+  },
+  {
+    "Part Name": "Interface-0143",
+    "Group Name": "GroupB",
+    "Date": "2025-12-07",
+    "Amount": 3389.4
+  },
+  {
+    "Part Name": "Spring-0081",
+    "Group Name": "Parts",
+    "Date": "2025-12-07",
+    "Amount": 2749.58
+  },
+  {
+    "Part Name": "Spring-0124",
+    "Group Name": "Parts",
+    "Date": "2025-12-07",
+    "Amount": 7126.72
+  },
+  {
+    "Part Name": "Screw-0128",
+    "Group Name": "Parts",
+    "Date": "2025-12-07",
+    "Amount": 2864.4
+  },
+  {
+    "Part Name": "Assembly-0106",
+    "Group Name": "GroupA",
+    "Date": "2025-12-08",
+    "Amount": 2184.37
+  },
+  {
+    "Part Name": "Module-0130",
+    "Group Name": "GroupA",
+    "Date": "2025-12-08",
+    "Amount": 3911.49
+  },
+  {
+    "Part Name": "Sensor-0110",
+    "Group Name": "GroupB",
+    "Date": "2025-12-08",
+    "Amount": 1569.32
+  },
+  {
+    "Part Name": "Switch-0139",
+    "Group Name": "GroupB",
+    "Date": "2025-12-08",
+    "Amount": 1740.08
+  },
+  {
+    "Part Name": "Processor-0148",
+    "Group Name": "GroupC",
+    "Date": "2025-12-08",
+    "Amount": 3192.57
+  },
+  {
+    "Part Name": "Widget-0101",
+    "Group Name": "GroupA",
+    "Date": "2025-12-09",
+    "Amount": 4023.54
+  },
+  {
+    "Part Name": "Unit-0133",
+    "Group Name": "GroupA",
+    "Date": "2025-12-09",
+    "Amount": 4674.04
+  },
+  {
+    "Part Name": "Sensor-0137",
+    "Group Name": "GroupB",
+    "Date": "2025-12-09",
+    "Amount": 3824.03
+  },
+  {
+    "Part Name": "Board-0077",
+    "Group Name": "GroupC",
+    "Date": "2025-12-09",
+    "Amount": 4795.42
+  },
+  {
+    "Part Name": "Circuit-0099",
+    "Group Name": "GroupC",
+    "Date": "2025-12-09",
+    "Amount": 4991.04
+  },
+  {
+    "Part Name": "Circuit-0120",
+    "Group Name": "GroupC",
+    "Date": "2025-12-09",
+    "Amount": 1281.1
+  },
+  {
+    "Part Name": "Washer-0076",
+    "Group Name": "Parts",
+    "Date": "2025-12-09",
+    "Amount": 3428.11
+  },
+  {
+    "Part Name": "Bolt-0088",
+    "Group Name": "Parts",
+    "Date": "2025-12-09",
+    "Amount": 6842.74
+  },
+  {
+    "Part Name": "Screw-0117",
+    "Group Name": "Parts",
+    "Date": "2025-12-09",
+    "Amount": 5601.57
+  },
+  {
+    "Part Name": "Screw-0136",
+    "Group Name": "Parts",
+    "Date": "2025-12-09",
+    "Amount": 2002.18
+  },
+  {
+    "Part Name": "Screw-0142",
+    "Group Name": "Parts",
+    "Date": "2025-12-09",
+    "Amount": 6563.68
+  },
+  {
+    "Part Name": "Unit-0112",
+    "Group Name": "GroupA",
+    "Date": "2025-12-10",
+    "Amount": 972.17
+  },
+  {
+    "Part Name": "Assembly-0116",
+    "Group Name": "GroupA",
+    "Date": "2025-12-10",
+    "Amount": 2240.82
+  },
+  {
+    "Part Name": "Processor-0080",
+    "Group Name": "GroupC",
+    "Date": "2025-12-10",
+    "Amount": 2229.09
+  },
+  {
+    "Part Name": "Bolt-0129",
+    "Group Name": "Parts",
+    "Date": "2025-12-10",
+    "Amount": 6851.6
+  },
+  {
+    "Part Name": "Spring-0135",
+    "Group Name": "Parts",
+    "Date": "2025-12-10",
+    "Amount": 4553.72
+  },
+  {
+    "Part Name": "Assembly-0108",
+    "Group Name": "GroupA",
+    "Date": "2025-12-11",
+    "Amount": 867.69
+  },
+  {
+    "Part Name": "Widget-0119",
+    "Group Name": "GroupA",
+    "Date": "2025-12-11",
+    "Amount": 1658.75
+  },
+  {
+    "Part Name": "Widget-0141",
+    "Group Name": "GroupA",
+    "Date": "2025-12-11",
+    "Amount": 4968.71
+  },
+  {
+    "Part Name": "Switch-0113",
+    "Group Name": "GroupB",
+    "Date": "2025-12-11",
+    "Amount": 3941.66
+  },
+  {
+    "Part Name": "Memory-0126",
+    "Group Name": "GroupC",
+    "Date": "2025-12-11",
+    "Amount": 2134.74
+  },
+  {
+    "Part Name": "Spring-0114",
+    "Group Name": "Parts",
+    "Date": "2025-12-11",
+    "Amount": 4337.54
+  },
+  {
+    "Part Name": "Assembly-0096",
+    "Group Name": "GroupA",
+    "Date": "2025-12-12",
+    "Amount": 2751.57
+  },
+  {
+    "Part Name": "Component-0121",
+    "Group Name": "GroupA",
+    "Date": "2025-12-12",
+    "Amount": 2798.95
+  },
+  {
+    "Part Name": "Unit-0150",
+    "Group Name": "GroupA",
+    "Date": "2025-12-12",
+    "Amount": 3277.3
+  },
+  {
+    "Part Name": "Controller-0078",
+    "Group Name": "GroupB",
+    "Date": "2025-12-12",
+    "Amount": 776.23
+  },
+  {
+    "Part Name": "Switch-0084",
+    "Group Name": "GroupB",
+    "Date": "2025-12-12",
+    "Amount": 2061.81
+  },
+  {
+    "Part Name": "Sensor-0091",
+    "Group Name": "GroupB",
+    "Date": "2025-12-12",
+    "Amount": 3453.72
+  },
+  {
+    "Part Name": "Adapter-0145",
+    "Group Name": "GroupB",
+    "Date": "2025-12-12",
+    "Amount": 1136.42
+  },
+  {
+    "Part Name": "Washer-0132",
+    "Group Name": "Parts",
+    "Date": "2025-12-12",
+    "Amount": 1328.34
+  }
+]
