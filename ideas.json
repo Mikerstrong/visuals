@@ -1,0 +1,58 @@
+[
+  {
+    "id": 1,
+    "text": "test 2",
+    "link": null,
+    "tag": "Wookie",
+    "submitter": "mike",
+    "submitted_at": "2025-12-17T13:15:47.247224",
+    "reviews": [
+      {
+        "reviewer": "mike",
+        "accurate": true,
+        "reviewed_at": "2025-12-17T13:18:17.404275"
+      }
+    ],
+    "trained": true,
+    "trained_by": "mike",
+    "trained_at": "2025-12-17T13:18:24.972500"
+  },
+  {
+    "id": 2,
+    "text": "test 2",
+    "link": null,
+    "tag": "Wookie",
+    "submitter": "mike",
+    "submitted_at": "2025-12-17T13:15:49.624138",
+    "reviews": [
+      {
+        "reviewer": "mike",
+        "accurate": false,
+        "reviewed_at": "2025-12-17T13:17:06.280214"
+      }
+    ],
+    "trained": true,
+    "trained_by": "mike",
+    "trained_at": "2025-12-17T13:18:34.321882"
+  },
+  {
+    "id": 3,
+    "text": "Idea 3",
+    "link": "www.google.com",
+    "tag": "Wookie",
+    "submitter": "mike",
+    "submitted_at": "2025-12-17T13:20:19.676956",
+    "reviews": [],
+    "trained": false
+  },
+  {
+    "id": 4,
+    "text": "Idea 3",
+    "link": "www.google.com",
+    "tag": "Wookie",
+    "submitter": "mike",
+    "submitted_at": "2025-12-17T13:20:22.551709",
+    "reviews": [],
+    "trained": false
+  }
+]
